@@ -7,10 +7,16 @@ from django.db import models
 
 class Quote(models.Model):
     text = models.CharField(max_length=1000)
-    meme = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100)
+    meme = models.ImageField(upload_to='images', default='')
+    tags = models.ManyToManyField('Tag')
+    category = models.ManyToManyField('Category')
+    author = models.ForeignKey('Author', on_delete = models.CASCADE, default='')
+
 
     def __str__(self):
-        return self.text
+        if self.text:
+            return self.text        
+        return self.meme
 
 
 class Author(models.Model):
@@ -21,10 +27,10 @@ class Author(models.Model):
 
 
 class Tag(models.Model):
-    Tag = models.CharField(max_length=1000)
+    tag = models.CharField(max_length=1000)
    
     def __str__(self):
-        return self.Tag
+        return self.tag
 
 
 class Category(models.Model):
@@ -34,15 +40,3 @@ class Category(models.Model):
         return self.category
 
 
-class Quote_Tag(models.Model):
-    manufacturer = models.ForeignKey(
-        'Quote',
-        on_delete=models.CASCADE,
-    )
-
-
-class Category_Quote(models.Model):
-    manufacturer = models.ForeignKey(
-        'Quote',
-        on_delete=models.CASCADE,
-    )

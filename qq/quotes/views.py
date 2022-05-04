@@ -6,5 +6,3 @@ class Home(View):
     def get(self, request):
         
         return render (request = request, template_name = 'index.html')
-
-   

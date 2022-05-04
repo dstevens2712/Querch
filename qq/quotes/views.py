@@ -1,9 +1,8 @@
 from django.shortcuts import render
-from django.urls import path
-from . import views 
-
-
-def index(request):
-    pass
+from django.views import View
 
 # Create your views here.
+class Home(View):
+    def get(self, request):
+        
+        return render (request = request, template_name = 'index.html')

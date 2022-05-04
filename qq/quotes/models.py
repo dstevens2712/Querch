@@ -20,23 +20,26 @@ class Quote(models.Model):
 
 
 class Author(models.Model):
-    author = models.CharField(max_length=1000)
-   
-    def __str__(self):
-        return self.author
-
+    author = models.CharField(max_length = 1000)
+    
+    def _str_(self):
+       return self.author 
 
 class Tag(models.Model):
-    tag = models.CharField(max_length=1000)
-   
-    def __str__(self):
-        return self.tag
-
+    tag = models.CharField(max_length = 1000)
+    
+    def _str_(self):
+       return self.tag 
 
 class Category(models.Model):
-    category = models.CharField(max_length=1000)
-   
-    def __str__(self):
-        return self.category
+    category = models.CharField(max_length = 1000)
+    
+    def _str_(self):
+       return self.category 
+  
+
+
+  
+
 
 

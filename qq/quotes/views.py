@@ -6,3 +6,15 @@ class Home(View):
     def get(self, request):
         
         return render (request = request, template_name = 'index.html')
+
+
+class About_us(View):
+    def get(self, request):
+
+        return render(request, template_name = 'about')
+
+
+class Results(View):
+    def get(self, request):
+
+        return render(request, template_name = 'results')     

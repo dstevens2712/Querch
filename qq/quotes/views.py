@@ -16,15 +16,30 @@ class Home(View):           #Get the Home page for Quotable Quotes
         },
         )
 
-
 class About_us(View):
     def get(self, request):
         nav_from = NavForm
 
         return render(request, template_name = 'about')
-
+  
 
 class Results(View):
     def get(self, request):
+        nav_form = NavForm
     
-        return render(request, template_name = 'results')     
+        return render(request, template_name = 'results')
+
+
+class Add_Quote(View):
+    def get(self, request):
+        pass
+
+
+class Advance_search(View):
+    pass
+
+
+class Result(View):
+    pass
+
+

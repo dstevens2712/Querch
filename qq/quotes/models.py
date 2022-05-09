@@ -4,7 +4,7 @@ from django.db import models
 
 
 class Category(models.Model):
-    name = models.CharField(max_length = 1000)
+    name = models.CharField(max_length = 250)
      
 class Quote(models.Model):
     text = models.TextField()
@@ -28,7 +28,7 @@ class Author(models.Model):
 
 '''
 class Tag(models.Model):
-    tag = models.CharField(max_length = 1000)
+    tag = models.CharField(max_length = 250)
     
     def _str_(self):
        return self.tag 

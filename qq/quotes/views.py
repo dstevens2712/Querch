@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
-
+from django.forms import Form
 from quotes.forms import SearchForm, NavBar
 from quotes.models import Home, About_us, Results
+from . forms import QuoteForm 
 # Create your views here.
 class Home(View):           #Get the Home page for Quotable Quotes
     def get(self, request):
@@ -33,12 +34,8 @@ class AboutUs(View):
 
 
 class AddQuote(View):
-    def get(self, request, quote_id):
-        quote_object = Quote.objects.get(id=quote_id)
-        quote_form =QuoteForm(instance=quote_object)
-
-        authors = Author.objects.filter(author=author_object)
-        AuthorForm(author=author_object)
+    def get(self, request):
+        quote_form =QuoteForm()
 
         return render( 
             request=request,
@@ -52,7 +49,7 @@ class AddQuote(View):
         quote = Quote.objects.get(id=quote_id)
 
         if 'save_quote' in request.POST:
-            quote_form = QuoteForm(request.POST, instance=quote)
+            quote_form = QuoteForm()
             quote_form.save()
 
         elif 'delete_quote' in request.POST:

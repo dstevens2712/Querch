@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-from django import forms
-from . models import Quote,Category, Author
-
-
-=======
 from asyncio import Task
 from unicodedata import category
 from django import forms
@@ -53,4 +47,3 @@ class TagForm(forms.ModelForm):
         tag, create = Tag.objects.get_or_create(tag=self.data['tag'])
         self.quote.tags.add(tag)
         
->>>>>>> b906e2bf424e8687ff295a1c43bdc2fd15c4d4cc

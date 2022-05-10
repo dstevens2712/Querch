@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 from django.views import View
 
 
+
 from .forms import QuoteForm, TagForm, CategoryForm
 from .models import Quote, Author, Tag, Category
+
 
 # Create your views here.
 class Home(View):           #Get the Home page for Quotable Quotes
@@ -20,7 +22,6 @@ class Home(View):           #Get the Home page for Quotable Quotes
     #     form = QuoteForm(request.POST)
     #     form.save()
         # return redirect ('results')
-
 
 class AboutUs(View):
     def get(self, request):

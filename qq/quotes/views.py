@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect
 from django.views import View
+
+
+
 from .forms import QuoteForm, TagForm, CategoryForm
 from .models import Quote, Author, Tag, Category
+
+
 # Create your views here.
-class Home(View):
+class Home(View):           #Get the Home page for Quotable Quotes
     def get(self, request):
         quote_form = QuoteForm()
         return render ( 
@@ -17,7 +22,6 @@ class Home(View):
     #     form = QuoteForm(request.POST)
     #     form.save()
         # return redirect ('results')
-
 
 class AboutUs(View):
     def get(self, request):
@@ -61,4 +65,5 @@ class Results(View):
                 'author_form':author_form,
             }
         )
+
 

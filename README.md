@@ -1,7 +1,7 @@
 # **Wow Project - Quotable Quotes**
 
 **Fellow Conspirators**<br>
-The motley crew members that contributed to this Querch Project: David Stevens (a.k.a. – dstevens2712), Tara May(a.k.a. -  ), Manuela Farhi (a.k.a. - 1mfarhi)  & David Kramer (a.k.a. - Dave218).<br>
+The motley crew members that contributed to this Querch Project: David Stevens (a.k.a. – dstevens2712), Tara May(a.k.a. - TaraMay21), Manuela Farhi (a.k.a. - 1mfarhi)  & David Kramer (a.k.a. - Dave218).<br>
 
 **About This Project**
 With this Django App you can search for quotes using various search options.

@@ -1,11 +1,11 @@
 from django.db import models
 
-
-
 # Create your models here.
 
 
+    
 class Quote(models.Model):
+
     text = models.CharField(max_length=1000)
     # meme = models.ImageField(upload_to='images', default='')
     tags = models.ManyToManyField('Tag')
@@ -25,6 +25,8 @@ class Author(models.Model):
     def __str__(self):
        return self.author 
 
+
+
 class Tag(models.Model):
     tag = models.CharField(max_length = 250)
     
@@ -41,6 +43,7 @@ class Category(models.Model):
 
 
   
+
 
 
 

@@ -5,9 +5,7 @@ from django.db import models
 class Quote(models.Model):
 
     text = models.CharField(max_length=1000)
-    # meme = models.ImageField(upload_to='images', default='')
     tags = models.ManyToManyField('Tag')
-
     category = models.ManyToManyField('Category')
     author = models.ForeignKey('Author', on_delete = models.CASCADE, default='Anonymous', null=True, blank=True)
 

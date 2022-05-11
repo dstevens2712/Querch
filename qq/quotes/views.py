@@ -28,10 +28,6 @@ class AboutUs(View):
         return render(request, 'about.html')
 
 
-class Results(View):
-    def get(self, request):
-        return render(request, 'results')
-
 class AddQuote(View):
     def get(self, request):
         quote_form = QuoteForm()

@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
 from django.views import View
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 8de500ca1e0a63f9799bc1a4b708c29fcf2107c9
 from .forms import QuoteForm, TagForm, CategoryForm, AuthorForm
 from .models import Quote, Author, Tag, Category
 
@@ -27,11 +30,6 @@ class AboutUs(View):
     def get(self, request):
         return render(request, 'about.html')
 
-
-class Results(View):
-    def get(self, request):
-        return render(request, 'results')
-
 class AddQuote(View):
     def get(self, request):
         quote_form = QuoteForm()
@@ -49,20 +47,16 @@ class AddQuote(View):
             quote_form.save()
 
 class Results(View):
-    def get(self, request, quote_id, author_id):
-    
-        quote_object = Quote.objects.get(id=quote_id)
-        quote_form = QuoteForm(quote=quote_object)
- 
-        authors = quote_object.author.all()
-        author_form = AuthorForm(author=quote_object.author)
+    def get(self, request, quote_ids):
+        quotes = []
+        for quote_id in quote_ids:
+            quotes.append(Quote.objects.filter(id=quote_id))
+            
         return render(
             request,
             template_name='results.html',
             context={
-                'quote_form':quote_form,
-                'id':quote_id,
-                'author_form':author_form,
+                'quotes' : quotes
             }
         )
 

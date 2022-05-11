@@ -3,7 +3,7 @@ from django.views import View
 
 
 
-from .forms import QuoteForm, TagForm, CategoryForm
+from .forms import QuoteForm, TagForm, CategoryForm, AuthorForm
 from .models import Quote, Author, Tag, Category
 
 
@@ -55,7 +55,7 @@ class Results(View):
         quote_form = QuoteForm(quote=quote_object)
  
         authors = quote_object.author.all()
-        author_form = AuthorForm(author=author_object)
+        author_form = AuthorForm(author=quote_object.author)
         return render(
             request,
             template_name='results.html',

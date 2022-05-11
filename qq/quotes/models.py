@@ -13,6 +13,12 @@ class Quote(models.Model):
     author = models.ForeignKey('Author', on_delete = models.CASCADE, default='Anonymous', null=True, blank=True)
 
 
+    def __str__(self):
+        if self.text:
+            return self.text        
+        # return self.meme
+
+
 class Author(models.Model):
 
     author = models.CharField(max_length = 250)

@@ -6,5 +6,5 @@ migrations/
 */migrations/
 */*/migrations/
 */*/*/migrations/
-*/db.sqlite3
+#*/db.sqlite3
 venv/

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .forms import QuoteForm, TagForm, CategoryForm, AuthorForm
+from .forms import QuoteForm, TagForm, CategoryForm
 from .models import Quote, Author, Tag, Category
 
 

@@ -1,17 +1,13 @@
 from django.db import models
+import csv
 
-# Create your models here.
-
-
-
-    
+# Create your models here. 
 class Quote(models.Model):
 
     text = models.CharField(max_length=1000)
     tags = models.ManyToManyField('Tag')
     category = models.ManyToManyField('Category')
     author = models.ForeignKey('Author', on_delete = models.CASCADE, default='Anonymous', null=True, blank=True)
-
 
     def __str__(self):
         if self.text:

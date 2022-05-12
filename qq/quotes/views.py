@@ -1,13 +1,17 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .forms import QuoteForm, TagForm, CategoryForm, AuthorForm
+from .forms import QuoteForm, TagForm, CategoryForm
 from .models import Quote, Author, Tag, Category
+import csv
+from pathlib import Path
 
 
 # Create your views here.
 class Home(View):           #Get the Home page for Quotable Quotes
     def get(self, request):
         quote_form = QuoteForm()
+        Import.author()
+        Import.quote()
         return render ( 
             request,
             'index.html',
@@ -15,10 +19,7 @@ class Home(View):           #Get the Home page for Quotable Quotes
                 'quote_form' : quote_form
             },
         )
-    # # def post(self, request):
-    #     form = QuoteForm(request.POST)
-    #     form.save()
-        # return redirect ('results')
+
 
 class AboutUs(View):
     def get(self, request):
@@ -53,5 +54,28 @@ class Results(View):
                 'quotes' : quotes
             }
         )
+
+class Import(View):
+    def author():
+            path = ('quotes.csv')
+            with open(path) as f:
+                reader = csv.reader(f)
+            for row in reader:
+                _, created = Author.objects.get_or_create(
+                author = row[1] if row[1] else 'Anonymous'
+                )
+            created.save()
+
+    def quote():
+            path = Path('quotes.csv').resolve()
+            with open(path) as f:
+                reader = csv.reader(f)
+            for row in reader:
+                a = Author.objects.get(author = row [1])
+                _, created = Quote.objects.get_or_create(
+                text = row[0],
+                author = a.id
+                )
+            created.save()
 
 

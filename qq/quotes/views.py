@@ -1,12 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 8de500ca1e0a63f9799bc1a4b708c29fcf2107c9
-from .forms import QuoteForm, TagForm, CategoryForm, AuthorForm
+from .forms import QuoteForm, TagForm, CategoryForm
 from .models import Quote, Author, Tag, Category
 
 

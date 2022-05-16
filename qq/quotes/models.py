@@ -1,4 +1,5 @@
 from django.db import models
+import csv
 
 # Create your models here.
 
@@ -8,7 +9,6 @@ class Quote(models.Model):
     tags = models.ManyToManyField('Tag', null=True, blank=True)
     category = models.ManyToManyField('Category', null=True, blank=True)
     author = models.ForeignKey('Author', on_delete = models.CASCADE, default='Anonymous', null=True, blank=True)
-
 
     def __str__(self):
         if self.text:

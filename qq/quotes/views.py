@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.views import View
 from .forms import QuoteForm, TagForm, CategoryForm
 from .models import Quote, Author, Tag, Category
-import csv
 from pathlib import Path
 
 
@@ -10,8 +9,6 @@ from pathlib import Path
 class Home(View):           #Get the Home page for Quotable Quotes
     def get(self, request):
         quote_form = QuoteForm()
-        Import.author()
-        Import.quote()
         return render ( 
             request,
             'index.html',
@@ -55,27 +52,27 @@ class Results(View):
             }
         )
 
-class Import(View):
-    def author():
-            path = ('quotes.csv')
-            with open(path) as f:
-                reader = csv.reader(f)
-            for row in reader:
-                _, created = Author.objects.get_or_create(
-                author = row[1] if row[1] else 'Anonymous'
-                )
-            created.save()
+# class Import(View):
+#     def author():
+#             path = ('quotes.csv')
+#             with open(path) as f:
+#                 reader = csv.reader(f)
+#             for row in reader:
+#                 _, created = Author.objects.get_or_create(
+#                 author = row[1] if row[1] else 'Anonymous'
+#                 )
+#             created.save()
 
-    def quote():
-            path = Path('quotes.csv').resolve()
-            with open(path) as f:
-                reader = csv.reader(f)
-            for row in reader:
-                a = Author.objects.get(author = row [1])
-                _, created = Quote.objects.get_or_create(
-                text = row[0],
-                author = a.id
-                )
-            created.save()
+#     def quote():
+#             path = Path('quotes.csv').resolve()
+#             with open(path) as f:
+#                 reader = csv.reader(f)
+#             for row in reader:
+#                 a = Author.objects.get(author = row [1])
+#                 _, created = Quote.objects.get_or_create(
+#                 text = row[0],
+#                 author = a.id
+#                 )
+#             created.save()
 
 

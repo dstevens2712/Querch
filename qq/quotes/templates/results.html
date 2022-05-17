@@ -1,5 +1,8 @@
 {% extends 'nav.html' %}
 {% block content %}
 
+    {% for quote in quotes %}
+        <li><a href="{% url 'result' quote.id %}">{{ quote.text }}</a></li>
+    {% endfor %}
 
 {% endblock content %}

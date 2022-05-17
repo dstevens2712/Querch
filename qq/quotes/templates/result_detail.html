@@ -1,5 +1,17 @@
 {% extends 'nav.html' %}
 {% block content %}
-<!-- insert content here -->
+
+
+{{ quote.text }}
+{{ quote.author }}
+
+<!-- {% for tag in quote.tags_set.all() %}
+    {{ tag }} 
+{% endfor %}
+
+{% for category in quote.category_set.all() %}
+    {{ category }} 
+{% endfor %} -->
+
 
 {% endblock content %}

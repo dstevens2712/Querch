@@ -1,6 +1,29 @@
 {% extends 'nav.html' %}
 {% block content %}
 
+<<<<<<< HEAD
 <h1>Hello World!</h1>
+=======
+<br><br><br>
+
+<center>
+    <h1>Quote of the Day!</h1>
+    <p>
+        {{ daily.text }}<br>
+        <label>- {{ daily.author.author }}</label>
+    </p>
+    <input type='text' name='search' placeholder='Search Here for a Quote'>&nbsp</input>
+    <input type='submit' value='Search'/>
+    <br><br><br>
+    <h2>Choose A Quote Category</h2>
+    <form action="{% url 'results' %}" method="GET">
+    {% for category in categories %}
+        <input type='submit' name='category' value={{category}}>&nbsp &nbsp</input>
+    {% endfor %}
+    </form>
+        
+    
+</center>
+>>>>>>> 2c2b17dbb87abfc264d63487bc3fa647f28a7d1c
 
 {% endblock content %}

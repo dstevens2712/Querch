@@ -7,24 +7,19 @@
     <h1>Quote of the Day!</h1>
     <p>
         {{ daily.text }}<br>
-        <label>{{ daily.author.author }}</label>
+        <label>- {{ daily.author.author }}</label>
     </p>
-    <input type = 'text' name = 'search' placeholder = 'Search Here for a Quote'>&nbsp
-    <input type = 'submit' value = 'Search'>
+    <input type='text' name='search' placeholder='Search Here for a Quote'>&nbsp</input>
+    <input type='submit' value='Search'/>
     <br><br><br>
     <h2>Choose A Quote Category</h2>
-    <input type = 'button' name = 'birthday' value = 'Birthday'>&nbsp &nbsp
-    <input type = 'button' name = 'motivation' value = 'Motivation'>&nbsp &nbsp
-    <input type = 'button' name = 'humor' value = 'Humor'>&nbsp &nbsp
-    <input type = 'button' name = 'spirituality' value = 'Spirituality'>
-    <p>
-        <input type = 'button' name = 'joy' value = 'Joy'>&nbsp &nbsp
-        <input type = 'button' name = 'love' value = 'Love'>&nbsp &nbsp
-        <input type = 'button' name = 'success' value = 'Success'>&nbsp &nbsp
-        <input type = 'button' name = 'humility' value = 'Humility'>
-    </p>
-
-
+    <form action="{% url 'results' %}" method="GET">
+    {% for category in categories %}
+        <input type='submit' name='category' value={{category}}>&nbsp &nbsp</input>
+    {% endfor %}
+    </form>
+        
+    
 </center>
 
 {% endblock content %}

@@ -2,21 +2,41 @@ from django.shortcuts import render, redirect
 from django.views import View
 from .forms import QuoteForm, TagForm, CategoryForm
 from .models import Quote, Author, Tag, Category
-from pathlib import Path
+import random
+
+
+
 
 
 # Create your views here.
 class Home(View):           #Get the Home page for Quotable Quotes
     def get(self, request):
-        quote_form = QuoteForm()
+        num = Quote.objects.count()
+        quote_id = random.randrange(1, num)
+        daily = Quote.objects.get(id = quote_id)
+        categories = Category.objects.all()
+        
         return render ( 
             request,
             'index.html',
             {
-                'quote_form' : quote_form
+                'daily' : daily,
+                'categories' : categories
             },
         )
 
+    def post(self, request):
+        if 'category' in request.POST:
+            category = request.POST['category'].lowercase()
+            return render(
+                request,
+                'results.html',
+                context={
+                    'category' : category
+                    }
+            )
+       
+            
 
 class AboutUs(View):
     def get(self, request):
@@ -39,11 +59,13 @@ class AddQuote(View):
             quote_form.save()
 
 class Results(View):
-    def get(self, request, quote_ids):
-        quotes = []
-        for quote_id in quote_ids:
-            quotes.append(Quote.objects.filter(id=quote_id))
-            
+   
+    def get(self, request):
+        category = request.GET['category']
+        if category:
+            obj = Category.objects.get(category = category)
+            quotes = Quote.objects.filter(category = obj.id)
+
         return render(
             request,
             template_name='results.html',
@@ -51,6 +73,21 @@ class Results(View):
                 'quotes' : quotes
             }
         )
+
+class Result(View):
+    def get(self, request, quote_id):
+        quote = Quote.objects.get(id=quote_id)
+            
+        return render(
+            request,
+            template_name='result_detail.html',
+            context={
+                'quote' : quote
+            }
+        )
+
+
+
 
 # class Import(View):
 #     def author():

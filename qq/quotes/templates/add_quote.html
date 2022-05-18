@@ -1,4 +1,11 @@
 {% extends 'nav.html' %}
 {% block content %}
 
+<center>
+<form action="{% url 'add' %}" method="POST">
+    {% csrf_token %}
+    {{ quote_form }}
+    <input type="submit" name="save_quote" value="Create" />
+</form>
+</center>
 {% endblock content %}

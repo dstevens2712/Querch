@@ -10,15 +10,15 @@ class QuoteForm(forms.ModelForm):
         fields = ['text', 'author']
 
     def __init__(self, *args, **kwargs):
-        self.author = kwargs.pop('author', None)
         super().__init__(*args, **kwargs)
         self.fields['text'].label = 'Quote'
         self.fields['author'].label = 'Author'
-        self.instance.author = self.author
+        
 
     def save(self, *args, **kwargs):
         author, create = Author.objects.get_or_create(author=self.data['author'])
-        self.quote.author.add(author)
+        self.instance.author = author
+        super().save(*args, **kwargs)
 
 class CategoryForm(forms.ModelForm):
     class Meta:

@@ -3,6 +3,8 @@ from django.views import View
 from .forms import QuoteForm, TagForm, CategoryForm
 from .models import Quote, Author, Tag, Category
 import random
+from django.http.response import HttpResponseRedirect
+from django.urls import reverse
 
 
 
@@ -54,10 +56,16 @@ class AddQuote(View):
         )
 
     def post(self, request):
+        print(request.POST)
         if 'save_quote' in request.POST:
             quote_form = QuoteForm(request.POST)
-            quote_form.save()
+            if quote_form.is_valid():
+               quote_form.save()
+            return HttpResponseRedirect(reverse('result', kwargs = {'quote_id' : Quote.objects.latest('pk').pk}
+            )
+            )
 
+            
 class Results(View):
    
     def get(self, request):

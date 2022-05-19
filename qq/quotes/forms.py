@@ -17,7 +17,12 @@ class QuoteForm(forms.ModelForm):
         # self.fields['author'].widget = forms.TextInput(attrs={'default' : 'Anonymous', 'required' : True, 'choice' : authors})
 
     def save(self, *args, **kwargs):
-        author, create = Author.objects.get_or_create(author=self.data['author'])
+        author = ''
+        try:
+            author = Author.objects.get(author = self.data['author'])
+        except:
+            author = Author.objects.create(author = self.data['author'])
+
         self.instance.author = author
         super().save(*args, **kwargs)
 

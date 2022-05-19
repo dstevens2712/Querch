@@ -1,5 +1,3 @@
-from asyncio import Task
-from unicodedata import category
 from django import forms
 from .models import Quote, Author, Category, Tag 
 
@@ -7,18 +5,22 @@ from .models import Quote, Author, Category, Tag
 class QuoteForm(forms.ModelForm):
     class Meta:
         model = Quote
-        fields = ['text', 'author']
+        fields = ['text', 'author', 'category', 'tags']
 
     def __init__(self, *args, **kwargs):
+        authors = Author.objects.all()
         super().__init__(*args, **kwargs)
         self.fields['text'].label = 'Quote'
         self.fields['author'].label = 'Author'
-        
+        self.fields['category'].label = 'Category'
+        self.fields['tags'].label = 'Tags'
+        # self.fields['author'].widget = forms.TextInput(attrs={'default' : 'Anonymous', 'required' : True, 'choice' : authors})
 
     def save(self, *args, **kwargs):
         author, create = Author.objects.get_or_create(author=self.data['author'])
         self.instance.author = author
         super().save(*args, **kwargs)
+
 
 class CategoryForm(forms.ModelForm):
     class Meta:

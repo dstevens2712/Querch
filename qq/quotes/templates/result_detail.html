@@ -1,9 +1,16 @@
 {% extends 'nav.html' %}
 {% block content %}
 
+<center>
+    <form action="{% url 'add' %}" method="POST">
+        {% csrf_token %}
+        {{ quote_form }}  
 
-{{ quote.text }}
-{{ quote.author }}
+        <input type="submit" name="save_quote" value="Update" />
+        <input type="submit" name="delete" value="Delete" />
+    </form>
+</center>
+
 
  {% for tag in quote.tags_set.all %}
     {{ tag }} 

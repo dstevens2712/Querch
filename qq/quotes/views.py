@@ -61,9 +61,6 @@ class AddQuote(View):
             # return HttpResponseRedirect(reverse('result', kwargs = {'quote_id' : Quote.objects.latest('pk').pk}
             return redirect('home')
             
-            
-
-            
 class Results(View):
    
     def get(self, request):

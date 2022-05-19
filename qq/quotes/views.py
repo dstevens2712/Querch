@@ -7,11 +7,8 @@ from django.http.response import HttpResponseRedirect
 from django.urls import reverse
 
 
-
-
-
 # Create your views here.
-class Home(View):           #Get the Home page for Quotable Quotes
+class Home(View):          
     def get(self, request):
         num = Quote.objects.count()
         quote_id = random.randrange(1, num)
@@ -61,10 +58,8 @@ class AddQuote(View):
             quote_form = QuoteForm(request.POST)
             if quote_form.is_valid():
                quote_form.save()
-            return HttpResponseRedirect(reverse('result', kwargs = {'quote_id' : Quote.objects.latest('pk').pk}
-            )
-            )
-
+            # return HttpResponseRedirect(reverse('result', kwargs = {'quote_id' : Quote.objects.latest('pk').pk}
+            return redirect('home')
             
 class Results(View):
    
@@ -84,15 +79,35 @@ class Results(View):
 
 class Result(View):
     def get(self, request, quote_id):
-        quote = Quote.objects.get(id=quote_id)
-            
+        quote = Quote.objects.get(id = quote_id)
+        quote_form = QuoteForm(instance = quote)   
         return render(
             request,
             template_name='result_detail.html',
             context={
-                'quote' : quote
+                'quote' : quote,
+                'quote_form' : quote_form
             }
         )
+    
+    def post(self, request, quote_id):
+        '''Update or delete a quote'''
+        quote = Quote.objects.filter(id = quote_id)
+        if 'save' in request.POST:
+            form = QuoteForm(request.POST)
+            if form.is_valid():
+                quote_description = form.cleaned_data['text']
+                author = form.cleaned_data['author']
+                quote.update(text = quote_description, author = author)
+            return redirect('result')
+
+        elif 'delete' in request.POST:
+            quote.delete()
+
+            return redirect('home')
+        
+
+       
 
 
 

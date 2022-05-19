@@ -61,7 +61,7 @@ class AddQuote(View):
             quote_form = QuoteForm(request.POST)
             if quote_form.is_valid():
                quote_form.save()
-            return HttpResponseRedirect(reverse('result', kwargs = {'quote_id' : Quote.objects.latest('pk').pk}
+            #return HttpResponseRedirect(reverse('result', kwargs = {'quote_id' : Quote.objects.latest('pk').pk}
             )
             )
 

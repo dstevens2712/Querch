@@ -5,7 +5,7 @@
 <form action="{% url 'add' %}" method="POST">
     {% csrf_token %}
     {{ quote_form }} 
-    <input type="submit" name="save_quote" value="Create" />
+    <input type="submit" name="create" value="Create" />
 </form>
 </center>
 {% endblock content %}

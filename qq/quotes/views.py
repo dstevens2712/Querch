@@ -2,17 +2,15 @@ from django.shortcuts import render, redirect
 from django.views import View
 from .forms import QuoteForm, TagForm, CategoryForm
 from .models import Quote, Author, Tag, Category
-import random
-from django.http.response import HttpResponseRedirect
-from django.urls import reverse
+from random import choice
 
 
 # Create your views here.
 class Home(View):          
     def get(self, request):
-        num = Quote.objects.count()
-        quote_id = random.randrange(1, num)
-        daily = Quote.objects.get(id = quote_id)
+        pks = Quote.objects.values_list('pk', flat=True)
+        random_pk = choice(pks)
+        daily = Quote.objects.get(pk=random_pk)
         categories = Category.objects.all()
         
         return render ( 
@@ -35,7 +33,6 @@ class Home(View):
                     }
             )
        
-            
 
 class AboutUs(View):
     def get(self, request):
@@ -54,11 +51,13 @@ class AddQuote(View):
 
     def post(self, request):
         print(request.POST)
-        if 'save_quote' in request.POST:
+        if 'create' in request.POST:
             quote_form = QuoteForm(request.POST)
             if quote_form.is_valid():
-               quote_form.save()
-            # return HttpResponseRedirect(reverse('result', kwargs = {'quote_id' : Quote.objects.latest('pk').pk}
+                author, _ = Author.objects.get_or_create(author = quote_form.cleaned_data['author'])
+                print(author)
+                quote_form.save()
+            
             return redirect('home')
             
 class Results(View):
@@ -71,7 +70,7 @@ class Results(View):
 
         return render(
             request,
-            template_name='results.html',
+            'results.html',
             context={
                 'quotes' : quotes
             }
@@ -83,7 +82,7 @@ class Result(View):
         quote_form = QuoteForm(instance = quote)   
         return render(
             request,
-            template_name='result_detail.html',
+            'result_detail.html',
             context={
                 'quote' : quote,
                 'quote_form' : quote_form
@@ -97,9 +96,9 @@ class Result(View):
             form = QuoteForm(request.POST)
             if form.is_valid():
                 quote_description = form.cleaned_data['text']
-                author = form.cleaned_data['author']
+                author = Author.objects.get_or_create(id = form.cleaned_data['author'])
                 quote.update(text = quote_description, author = author)
-            return redirect('result')
+            return redirect('results')
 
         elif 'delete' in request.POST:
             quote.delete()

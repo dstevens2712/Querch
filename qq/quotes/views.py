@@ -54,7 +54,7 @@ class AddQuote(View):
 
     def post(self, request):
         print(request.POST)
-        if 'save_quote' in request.POST:
+        if 'create' in request.POST:
             quote_form = QuoteForm(request.POST)
             if quote_form.is_valid():
                quote_form.save()

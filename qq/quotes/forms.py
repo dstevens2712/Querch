@@ -1,5 +1,5 @@
 from django import forms
-from .models import Quote, Author, Category, Tag 
+from .models import Quote, Author, Category, Tag
 
 
 class QuoteForm(forms.ModelForm):
@@ -51,4 +51,12 @@ class TagForm(forms.ModelForm):
 
         tag, create = Tag.objects.get_or_create(tag=self.data['tag'])
         self.quote.tags.add(tag)
+
+
+#class SearchForm(forms.ModelForm):
+ #   class Meta:
+  #      model = Search
+   #     fields = ['search']
+    #def __init__
+
         

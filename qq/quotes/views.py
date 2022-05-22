@@ -54,7 +54,7 @@ class AddQuote(View):
 
     def post(self, request):
         print(request.POST)
-        if 'save_quote' in request.POST:
+        if 'create' in request.POST:
             quote_form = QuoteForm(request.POST)
             if quote_form.is_valid():
                quote_form.save()
@@ -81,6 +81,7 @@ class Result(View):
     def get(self, request, quote_id):
         quote = Quote.objects.get(id = quote_id)
         quote_form = QuoteForm(instance = quote)   
+        
         return render(
             request,
             template_name='result_detail.html',
@@ -97,7 +98,8 @@ class Result(View):
             form = QuoteForm(request.POST)
             if form.is_valid():
                 quote_description = form.cleaned_data['text']
-                author = form.cleaned_data['author']
+                author = Author.objects.get_or_create(form.cleaned_data['author'])
+
                 quote.update(text = quote_description, author = author)
             return redirect('result')
 
@@ -105,9 +107,21 @@ class Result(View):
             quote.delete()
 
             return redirect('home')
-        
 
-       
+
+
+
+
+#class Search(View):
+ #   def Search(request):
+  #      if request.method == "POST":
+   #         author_name = request.POST.get('name', None)
+        # if author_name:
+        #     results = Search.objects.filter(name__contains=author_name)
+        #     return render(request, 'search.html', {"results":results})
+
+        # return render(request, 'search.html')
+     
 
 
 

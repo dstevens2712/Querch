@@ -14,14 +14,8 @@ class QuoteForm(forms.ModelForm):
         self.fields['author'].label = 'Author'
         self.fields['category'].label = 'Category'
         self.fields['tags'].label = 'Tags'
-        # self.fields['author'].widget = forms.TextInput(attrs={'default' : 'Anonymous', 'required' : True, 'choice' : authors})
 
-    def save(self, *args, **kwargs):
-        author, create = Author.objects.get_or_create(author=self.data['author'])
-        self.instance.author = author
-        super().save(*args, **kwargs)
-
-
+    
 class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category

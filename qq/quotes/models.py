@@ -8,7 +8,7 @@ class Quote(models.Model):
     text = models.CharField(max_length=5000)
     tags = models.ManyToManyField('Tag')
     category = models.ManyToManyField('Category')
-    author = models.ForeignKey('Author', on_delete = models.CASCADE, null=True, blank=True)
+    author = models.ForeignKey('Author', on_delete = models.CASCADE)
 
     def __str__(self):
         if self.text:

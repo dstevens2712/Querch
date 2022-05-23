@@ -46,20 +46,22 @@ class AddQuote(View):
         quote_form = QuoteForm()
         return render(
             request,
-            'add_quote.html',
+            'quote.html',
             {
                 'quote_form' : quote_form,
             }
         )
 
     def post(self, request):
-        print(request.POST)
-        if 'create' in request.POST:
-            quote_form = QuoteForm(request.POST)
-            if quote_form.is_valid():
-               quote_form.save()
-            return HttpResponseRedirect(reverse('result', kwargs = {'quote_id' : Quote.objects.latest('pk').pk}))
-            # return redirect('home')
+        quote_form = QuoteForm(request.POST)
+        if quote_form.is_valid():
+            author = Author.objects.get(author = quote_form.cleaned_data['author'])
+            quote = Quote.objects.create(text = quote_form.cleaned_data['text'], author = author) 
+            quote.tags.set(quote_form.cleaned_data['tags'])
+            quote.category.set(quote_form.cleaned_data['category']) 
+            quote.save()
+        
+        return redirect('result', quote.id)
             
 class Results(View):
    
@@ -73,66 +75,62 @@ class Results(View):
             request,
             'results.html',
             context={
-                'quotes' : quotes
+                'quotes' : quotes,
+                'category' : category
             }
         )
 
 class Result(View):
     def get(self, request, quote_id):
         quote = Quote.objects.get(id = quote_id)
-        quote_form = QuoteForm(instance = quote)   
+        
         return render(
             request,
             'result_detail.html',
             context={
                 'quote' : quote,
-                'quote_form' : quote_form
             }
         )
-    
-    def post(self, request, quote_id):
-        '''Update or delete a quote'''
-        quote = Quote.objects.filter(id = quote_id)
-        if 'save' in request.POST:
-            form = QuoteForm(request.POST)
-            if form.is_valid():
-                quote_description = form.cleaned_data['text']
-                author = form.cleaned_data['author']
-                quote.update(text = quote_description, author = author)
-            return redirect('results')
 
-        elif 'delete' in request.POST:
+  
+class Update(View):
+    def get(self, request, quote_id):
+        quote = Quote.objects.get(id = quote_id)
+        quote_form = QuoteForm(instance = quote)
+        return render(
+                    request,
+                    'quote.html',
+                    context={
+                       'quote' : quote,
+                       'quote_form' :  quote_form
+                    }
+                )
+
+
+    def post(self,  request, quote_id):
+        quote = Quote.objects.get(pk = quote_id) # this is the quote as in the db
+        quote_form = QuoteForm(request.POST)  # this is the updated data
+       
+        if quote_form.is_valid():
+            
+            if 'update' in request.POST: # updating the db
+                quote.text = quote_form.cleaned_data['text']
+                author = Author.objects.get(author = quote_form.cleaned_data['author'])
+                quote.author = author
+                quote.tags.set(quote_form.cleaned_data['tags'])
+                quote.category.set(quote_form.cleaned_data['category']) 
+                quote.save()
+            
+                return redirect('result', quote.id)                        
+            
+            
             quote.delete()
 
             return redirect('home')
+
+                     
+
+
         
-
+  
        
-
-
-
-
-# class Import(View):
-#     def author():
-#             path = ('quotes.csv')
-#             with open(path) as f:
-#                 reader = csv.reader(f)
-#             for row in reader:
-#                 _, created = Author.objects.get_or_create(
-#                 author = row[1] if row[1] else 'Anonymous'
-#                 )
-#             created.save()
-
-#     def quote():
-#             path = Path('quotes.csv').resolve()
-#             with open(path) as f:
-#                 reader = csv.reader(f)
-#             for row in reader:
-#                 a = Author.objects.get(author = row [1])
-#                 _, created = Quote.objects.get_or_create(
-#                 text = row[0],
-#                 author = a.id
-#                 )
-#             created.save()
-
-

@@ -2,12 +2,12 @@
 {% block content %}
 
 <center>
-    <form action="{% url 'result' quote.id %}" method="POST">
-        {% csrf_token %}
-        {{ quote_form }}  
-
+   {{ quote.text }} {{ quote.author }} 
+    <form action="{% url 'update' quote.id %}" method="GET">
+       
+        
         <input type="submit" name="update" value="Update" />
-        <input type="submit" name="delete" value="Delete" />
+     
     </form>
 </center>
 
@@ -22,3 +22,4 @@
 
 
 {% endblock content %}
+

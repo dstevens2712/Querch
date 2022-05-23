@@ -3,6 +3,8 @@ from django.views import View
 from .forms import QuoteForm, TagForm, CategoryForm
 from .models import Quote, Author, Tag, Category
 from random import choice
+from django.http.response import HttpResponseRedirect
+from django.urls import reverse
 
 
 # Create your views here.
@@ -33,6 +35,7 @@ class Home(View):
                     }
             )
        
+            
 
 class AboutUs(View):
     def get(self, request):
@@ -54,11 +57,9 @@ class AddQuote(View):
         if 'create' in request.POST:
             quote_form = QuoteForm(request.POST)
             if quote_form.is_valid():
-                author, _ = Author.objects.get_or_create(author = quote_form.cleaned_data['author'])
-                print(author)
-                quote_form.save()
-            
-            return redirect('home')
+               quote_form.save()
+            return HttpResponseRedirect(reverse('result', kwargs = {'quote_id' : Quote.objects.latest('pk').pk}))
+            # return redirect('home')
             
 class Results(View):
    
@@ -96,7 +97,7 @@ class Result(View):
             form = QuoteForm(request.POST)
             if form.is_valid():
                 quote_description = form.cleaned_data['text']
-                author = Author.objects.get_or_create(id = form.cleaned_data['author'])
+                author = form.cleaned_data['author']
                 quote.update(text = quote_description, author = author)
             return redirect('results')
 

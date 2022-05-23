@@ -1,0 +1,25 @@
+{% extends 'nav.html' %}
+{% block content %}
+
+<center>
+{% if quote.id %}
+    <form action="{% url 'update' quote.id %}" method="POST">
+    {% else %}
+        <form action="{% url 'add' %}" method="POST">
+    {% endif %}
+
+    {% csrf_token %}
+    {{ quote_form }} 
+
+    {% if quote.id %}
+        <input type="submit" name="update" value="Update" />
+        <input type="submit" name="delete" value="Delete" />
+    {% else %}
+        <input type="submit" name="create" value="Create" />
+    {% endif %}
+
+    
+</form>
+</center>
+{% endblock content %}
+

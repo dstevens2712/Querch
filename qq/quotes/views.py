@@ -6,6 +6,7 @@ from random import choice
 from django.http import HttpResponse
 
 # Create your views here.
+# Pks are quote ids pulling from data base
 class Home(View):          
     def get(self, request):
         pks = Quote.objects.values_list('pk', flat=True)
@@ -22,6 +23,7 @@ class Home(View):
             },
         )
 
+# data will display according to the post
     def post(self, request):
         if 'category' in request.POST:
             category = request.POST['category'].lowercase()
@@ -32,12 +34,14 @@ class Home(View):
                     'category' : category
                     }
             )
-       
 
+
+# Code of info about the creators of Quotable Quotes, showing our page on app linking to our template about.html
 class AboutUs(View):
     def get(self, request):
         return render(request, 'about.html')
 
+# this code allows a user to add a quote to our data base
 class AddQuote(View):
     def get(self, request):
         quote_form = QuoteForm()
@@ -49,6 +53,8 @@ class AddQuote(View):
             }
         )
 
+
+# define variables for form, after user edits it returns clean data
     def post(self, request):
         quote_form = QuoteForm(request.POST)
         if quote_form.is_valid():
@@ -59,7 +65,10 @@ class AddQuote(View):
             quote.save()
         
         return redirect('result', quote.id)
-            
+
+
+
+# Results page with all quotes displayed according to category
 class Results(View):
    
     def get(self, request):
@@ -77,6 +86,8 @@ class Results(View):
             }
         )
 
+
+# This page displays a selected quote for further editing
 class Result(View):
     def get(self, request, quote_id):
         quote = Quote.objects.get(id = quote_id)
@@ -89,7 +100,9 @@ class Result(View):
             }
         )
 
-  
+
+
+# Here the user edits(update) the quote and can delete the quote
 class Update(View):
     def get(self, request, quote_id):
         quote = Quote.objects.get(id = quote_id)
@@ -118,12 +131,12 @@ class Update(View):
                 quote.category.set(quote_form.cleaned_data['category']) 
                 quote.save()
             
-                return redirect('result', quote.id)                        
+                return redirect('result', quote.id) # Here you will be directed back to the result page page                       
             
             
             quote.delete()
 
-            return redirect('home')
+            return redirect('home') # If deleted a quote you will be directed back to home page
 
                      
 

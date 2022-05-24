@@ -1,12 +1,14 @@
 from django import forms
 from .models import Quote, Author, Category, Tag
 
-
+# Create your forms here
+# For user input (create, read, update, delete)
 class QuoteForm(forms.ModelForm):
     class Meta:
         model = Quote
         fields = ['text', 'author', 'category', 'tags']
 
+# Function to init Class. Inheriting arguments and key word arguments
     def __init__(self, *args, **kwargs):
         authors = Author.objects.all()
         super().__init__(*args, **kwargs)
@@ -29,6 +31,7 @@ class TagForm(forms.ModelForm):
     class Meta:
         model = Tag
         fields = ['tag']
+    
     def __init__(self, *args, **kwargs):
         self.quote = kwargs.pop('quote', None)
         super().__init__(*args, **kwargs)
@@ -42,10 +45,6 @@ class TagForm(forms.ModelForm):
         self.quote.tags.add(tag)
 
 
-#class SearchForm(forms.ModelForm):
- #   class Meta:
-  #      model = Search
-   #     fields = ['search']
-    #def __init__
+
 
         

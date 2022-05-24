@@ -6,7 +6,7 @@ from random import choice
 from django.http import HttpResponse
 
 # Create your views here.
-# Pks are quote ids pulling from data base
+# Pks are quote ids pulling from data base and use render to connect to the indext.html file with lists of quotes
 class Home(View):          
     def get(self, request):
         pks = Quote.objects.values_list('pk', flat=True)
@@ -24,6 +24,7 @@ class Home(View):
         )
 
 # data will display according to the post
+# Post is taking in an argument
     def post(self, request):
         if 'category' in request.POST:
             category = request.POST['category'].lowercase()

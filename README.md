@@ -95,15 +95,15 @@ A random quote will appear on the top of the page every time the user refreshes 
 
 
 # Some Screen Shots
-From this - <br>
+### **From this - <br>**
 ![wireframe-initial](https://user-images.githubusercontent.com/98430863/170386732-08d14833-4536-48ef-a8a4-c5a5ef5040b9.jpg)
 
 
-To this - <br>
+### **To this - <br>**
 ![wireframe](https://user-images.githubusercontent.com/98430863/170386745-c2b02949-73b2-4ac0-803e-f7c4201f4a1a.jpg)
 
 
-The Home Page - <br>
+### **The Home Page - <br>**
 ![home-page](https://user-images.githubusercontent.com/98430863/170386756-6b8f68ed-993a-4225-a4d6-b8a69e51af14.jpg)
 
 

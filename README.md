@@ -1,12 +1,20 @@
 # **Wow Project - Quotable Quotes**
 
 **Fellow Conspirators**<br>
-The motley crew members that contributed to this Querch Project: David Stevens (a.k.a. – dstevens2712), Tara May(a.k.a. - TaraMay21), Manuela Farhi (a.k.a. - 1mfarhi)  & David Kramer (a.k.a. - Dave218).<br>
+The motley crew members that contributed to this Querch Project: David Stevens (a.k.a. – dstevens2712), Tara May (a.k.a. - TaraMay21), Manuela Farhi (a.k.a. - 1mfarhi)  & David Kramer (a.k.a. - Dave218).<br>
 
-**About This Project**
+> ### **Special Thanks!**<br>
+>The crew would love to extend a very special and heartfelt thanks to our:<br>
+**Instructors - Lillie & Yusuf**<br>
+**Mentor - Lee Harvey**<br>
+**TA's - Walden & Manuel**<br>
+Without you all, this project would have never left the ground!
+
+
+**About This Project**<br>
 With this Django App you can search for quotes using various search options.
 Such as: Author; Category; Saying; Tags.
-Quotes can be either text and/or images (aka - memes).
+Quotes can be either text and/or images (a.k.a. - memes).
 One with registration access, also has the ability to add/edit/delete any quote.
 
 ## **How To View The Project**
@@ -20,34 +28,34 @@ One with registration access, also has the ability to add/edit/delete any quote.
 6. Return to the main folder `Quotable Quotes` (if necessary) by `cd ..`
 7. Run `pip install django` (to install Django)
 8. Start the virtual server – `python manage.py runserver` (or `python3 manage.py runserver`)
-9. In the browser of your choice, type for the url , `localhost:8000/home', and you should be good to start quoting away!
+9. In the browser of your choice, type for the url , `localhost:8000', and you should be good to start quoting away!
 
 # **MVP**
 
 
 Operations:  Our app functions using the CRUD operations:
 
-**Create** – The user can add quotes to the database. Add to that quote any relevant tags and choose the category which it belongs to.
+**Create** – The user can add quotes to the database. Assign to that quote a  category which it belongs to, and a tag.
 
 **Read** – The app can be used by anyone who just wished to view the quotes of any given category.
 
-**Update** – If the user sees an existing saying and would like to add/change the tags associated with it, that can be done too.
+**Update** – If the user sees an existing saying and would like to add/change the quote, category or tag associated with it, that can be done too.
 
-**Delete** – A saying or quote that is not correct, misleading, or not appropriate, may be deleted completely from the database.
+**Delete** – A saying or quote that is not correct, misleading, or not appropriate, or a duplicate, may be deleted completely from the database.
 
 
 ### **Detailed Navigation of the site:**
 The pages that are currently in the making (and explained in detailed below) are - 
 
       a) Home Page
-      b) Advance Search
+      b) Advance Search (post MVP)
       c) Results Page
       d) Results Detailed Page 
       e) Add A Quote 
       f) About Us 
 
 
-**a) Home Page** www.querch.com - When the user arrives at the Quotable Quotes Site, the user will see the Homepage. The navigation bar at the top or the search box in the center of the page. This navigation bar appears at the top of each page, allowing the user to reroute to further searches.
+**a) Home Page** www.querch.com - When the user arrives at the Quotable Quotes Site, the user will see the Homepage. The navigation bar at the top. This navigation bar appears at the top of each page, allowing the user to reroute to other parts of the website.
 
 **The Navigation Bar:**
 
@@ -55,6 +63,7 @@ The pages that are currently in the making (and explained in detailed below) are
 
 “Add” -  www.querch.com/add-edit-delete - here the user will be able to add/edit/delete a quote.
 
+Post MVP:
 “Topics” - this is a ‘drop-down’ menu which will lead to the results page based on the topic.
 
 “Login” - www.querch.com/login - users who want to register and/or want to login.
@@ -63,13 +72,14 @@ A random quote will appear on the top of the page every time the user refreshes 
 
 **Various search options:**
 
-“Search” -  www.querch.com/results - searching by a keyword.
+      Post MVP:
+      “Search” -  www.querch.com/results - searching by a keyword.
 
-“Advanced Search” -  www.querch.com/advanced-search - here the user can search by topic/author/tags etc.
+      “Advanced Search” -  www.querch.com/advanced-search - here the user can search by topic/author/tags etc.
 
-“Quick Quotes” -  www.querch.com/results - the user can choose a topic and get the results in the results page.
+      “Quick Quotes” -  www.querch.com/results - the user can choose a topic and get the results in the results page.
 
-“Memes & other images” -  www.querch.com/results - the user can view the results in the results page.
+      “Memes & other images” -  www.querch.com/results - the user can view the results in the results page.
 
 **b) Advanced Search** -  www.querch.com/advance-search - here the user can search by topic/author/tags etc.
 
@@ -84,5 +94,14 @@ A random quote will appear on the top of the page every time the user refreshes 
 <p>
 
 
-# Screen Shots
+# Some Screen Shots
+From this - <br>
+
+
+To this - <br>
+
+
+The Home Page - <br>
+
+
 

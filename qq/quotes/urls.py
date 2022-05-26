@@ -2,6 +2,10 @@ from django.urls import path
 from .views import Home, AboutUs, AddQuote, Results, Result, Update
 from .import views
 
+# connects our code to a specific page
+# code will render the following URLs: /home /about /add /results
+
+
 urlpatterns = [
     path('', Home.as_view(), name='home'),
     path('about', AboutUs.as_view(), name='about'),

@@ -5,7 +5,7 @@ The motley crew members that contributed to this Querch Project: David Stevens (
 
 > ### **Special Thanks!**<br>
 >The crew would love to extend a very special and heartfelt thanks to our:<br>
-**Instructors - Lillie & Yusuf**<br>
+**Instructors - Lillie, Yusuf, & Paul**<br>
 **Mentor - Lee Harvey**<br>
 **TA's - Walden & Manuel**<br>
 Without you all, this project would have never left the ground!

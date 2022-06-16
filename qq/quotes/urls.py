@@ -13,5 +13,6 @@ urlpatterns = [
     path('results', Results.as_view(), name='results'),
     path('result/<int:quote_id>', Result.as_view(), name='result'),
     path('update/<int:quote_id>', Update.as_view(), name='update'),
+    # path('quote/'. quote_list.as_view, name='quote_list'),
 ]
 

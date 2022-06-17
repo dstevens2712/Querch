@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.contrib.auth.models import User
+from django.conf import settings
 
 # Create your models here.
 # These are the quotes diplaying the relationships
@@ -35,11 +36,5 @@ class Category(models.Model):
     
     def __str__(self):
        return self.category 
-
-  
-
-
-  
-
 
 

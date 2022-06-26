@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.conf import settings
+from django.db.models.signals import post_save
 
 
 # Create your models here.
@@ -14,6 +17,7 @@ class Quote(models.Model):
         if self.text:
             return self.text        
        
+   
 
 # Charfield created with a default for author
 class Author(models.Model):
@@ -36,7 +40,6 @@ class Category(models.Model):
     def __str__(self):
        return self.category 
 
-  
 
 
   

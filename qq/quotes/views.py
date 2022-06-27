@@ -73,19 +73,47 @@ class AddQuote(View):
 class Results(View):
    
     def get(self, request):
-        category = request.GET['category']
+        category = None
+        try:
+            category = request.GET['category']
+        except:
+            pass
         if category:
             obj = Category.objects.get(category = category)
-            quotes = Quote.objects.filter(category = obj.id)
-
+            quotes = Quote.objects.filter(id = obj.id)
+            context={'quotes': quotes, 'category': category, 'all': False}
+        else:
+            organized = {}
+            quotes = Quote.objects.all()
+            categories = Category.objects.all()
+            cat_names = []
+            for category in categories:
+                if category != '':
+                    cat_names.append(str(category))
+                    q = Quote.objects.filter(category = category.id)
+                    organized[category] = []
+                    for u in q:
+                        u = Quote.objects.get(text = u)
+                        organized[category].append(u)
+            quotes = []
+            for org in organized:
+                 if org != '':
+                    quotes.append(organized[org])
+           
+            context = {
+                'quotes': quotes,
+                'categories': cat_names,
+                'all' : True
+            }
+        
+              
         return render(
             request,
             'results.html',
-            context={
-                'quotes' : quotes,
-                'category' : category
-            }
+            context
         )
+            
+        
 
 
 # This page displays a selected quote for further editing

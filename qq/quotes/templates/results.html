@@ -2,14 +2,33 @@
 
 {% extends 'nav.html' %}
 {% block content %}
-  
-{% if category %}
-<h1>{{ category | title}}</h1>
-{% endif %}
+
+{% if not all %}
+    {% if category %}
+     <h1>{{ category | title}}</h1>
+    {% endif %}
 
     {% for quote in quotes %}
         <li><a href="{% url 'result' quote.id %}">{{ quote.text }}</a> - {{ quote.author }}</li>
     {% endfor %}
+{% else %}
+    {% for category in categories %}
+        {{category | title}}
+        {% for quote in quotes %}
+             {% for q in quote %}
+                <a href="{% url 'result' q.id %}">
+                        <p>{{ q.text }}</p>
+                        <label>- {{q.author}}</label>
+                        <section>
+                            {% for tag in q.tags.all %}
+                                <span >{{tag}}</span>
+                            {% endfor %}
+                        </section>
+                 </a>
+             {% endfor %}
+        {% endfor %}
+    {% endfor %}
 
+{% endif %}
 {% endblock content %}
 

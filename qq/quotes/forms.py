@@ -1,5 +1,9 @@
 from django import forms
-from .models import Quote, Author, Category, Tag
+from .models import Quote, Author, Category, Tag, Person
+from django.forms import ModelForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
 
 # Create your forms here
 # For user input (create, read, update, delete)
@@ -48,6 +52,14 @@ class TagForm(forms.ModelForm):
         self.quote.tags.add(tag)
 
 
+class RegisterForm(ModelForm):
+    username = forms.CharField(max_length=100)
+    password = forms.CharField(widget=PasswordInput)
+    email = forms.CharField(widget=EmailInput)
+
+    class Meta:
+        model = User
+        fields = ["username", "password1", "password2", "email"]
 
 
         

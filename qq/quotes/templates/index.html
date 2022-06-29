@@ -4,6 +4,14 @@
 {% block content %}
 
 <br><br><br>
+<style>
+    table {
+      max-width: 45%;
+      border: 3px solid purple;
+      border-radius: 15px;
+      padding: 15px;
+    }
+</style>
     
 <center>
     <h1>Random Quote!</h1>
@@ -11,6 +19,7 @@
         {{ daily.text }}<br>
         <label>- {{ daily.author.author }}</label>
     </p>
+<<<<<<< HEAD
     <h1>Search for a quote or author</h1>
 <form action="{% url 'search' %}" method="get">
   {% csrf_token %}
@@ -18,16 +27,25 @@
   <input type='submit' value='Search'/> 
 </form>
     
+=======
+  
+>>>>>>> 9cfc2959ebd49f8dde7c3e963423c496f8d45b16
     <br><br><br>
-    <h2>Choose A Quote Category</h2>
+    <h3>Choose A Quote Category</h3>
+<table>
+<tr>
+<td><center>
     <form action="{% url 'results' %}" method="GET">
     {% for category in categories %}
-        <input type='submit' name='category' value={{category}}>&nbsp &nbsp</input>
+        <input type='submit' name='category' value={{category}} style="margin-bottom:10px">&nbsp &nbsp</input>
     {% endfor %}
-    </form>
-        
+    </form></center>
+</td>
+</tr>
+</table>    
     
 </center>
 
 {% endblock content %}
+
 

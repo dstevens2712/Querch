@@ -1,0 +1,11 @@
+{% extends 'nav.html' %}
+
+% block content %
+
+{{ quote_list }}
+
+{% for quote in quote_list %}
+    <p>{{ instance.id }} - {{ instance.title }}</p>
+{% endfor %}
+
+{% endblock %}

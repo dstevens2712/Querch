@@ -3,7 +3,6 @@ from django.views import View
 from .forms import QuoteForm, TagForm, CategoryForm
 from .models import Quote, Author, Tag, Category
 from random import choice
-from django.http import HttpResponse
 
 # Create your views here.
 # Pks are quote ids pulling from data base and use render to connect to the indext.html file with lists of quotes
@@ -12,14 +11,15 @@ class Home(View):
         pks = Quote.objects.values_list('pk', flat=True)
         random_pk = choice(pks)
         daily = Quote.objects.get(pk=random_pk)
-        categories = Category.objects.all()
-        
+        categories = Category.objects.all().order_by('category')
+
         return render ( 
             request,
             'index.html',
             {
                 'daily' : daily,
                 'categories' : categories
+                
             },
         )
 
@@ -28,9 +28,11 @@ class Home(View):
     def post(self, request):
         if 'category' in request.POST:
             category = request.POST['category'].lowercase()
+            
             return render(
                 request,
                 'results.html',
+               
                 context={
                     'category' : category
                     }
@@ -72,21 +74,43 @@ class AddQuote(View):
 # Results page with all quotes displayed according to category
 class Results(View):
    
-    def get(self, request):
-        category = request.GET['category']
+      def get(self, request):
+        category = None
+        try:
+            category = request.GET['category']
+        except:
+            pass
         if category:
             obj = Category.objects.get(category = category)
             quotes = Quote.objects.filter(category = obj.id)
+            
+            context={
+                'quotes': quotes, 
+                'category': category, 
+                'all': False
+                }
 
+        else:
+            categories = Category.objects.all().order_by('category')
+            quotes = []
+            for single_category in categories:
+                category_quotes = Quote.objects.filter(category = single_category.id)
+                quotes.append(category_quotes)
+            
+            all_quotes = zip(categories, quotes)
+            
+            context = {
+            'all_quotes': all_quotes,
+            'all' : True
+            }   
+     
+             
         return render(
             request,
             'results.html',
-            context={
-                'quotes' : quotes,
-                'category' : category
-            }
+            context
         )
-
+            
 
 # This page displays a selected quote for further editing
 class Result(View):
@@ -100,7 +124,6 @@ class Result(View):
                 'quote' : quote,
             }
         )
-
 
 
 # Here the user edits(update) the quote and can delete the quote
@@ -169,6 +192,3 @@ class Search(View):
                      
 
 
-        
-  
-       

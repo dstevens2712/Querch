@@ -1,34 +1,39 @@
-<!-- Page that shows created , updated, and deleted results -->
-
 {% extends 'nav.html' %}
 {% block content %}
 
+<style>
+    table {
+      max-width: 85%;
+      padding-left: 35px;
+    }
+</style>
+
+<table>
+    <tr>
+    <td>
 {% if not all %}
     {% if category %}
      <h1>{{ category | title}}</h1>
     {% endif %}
 
     {% for quote in quotes %}
+    <ul>
         <li><a href="{% url 'result' quote.id %}">{{ quote.text }}</a> - {{ quote.author }}</li>
+    </ul>
     {% endfor %}
-{% else %}
-    {% for category in categories %}
-        {{category | title}}
-        {% for quote in quotes %}
-             {% for q in quote %}
-                <a href="{% url 'result' q.id %}">
-                        <p>{{ q.text }}</p>
-                        <label>- {{q.author}}</label>
-                        <section>
-                            {% for tag in q.tags.all %}
-                                <span >{{tag}}</span>
-                            {% endfor %}
-                        </section>
-                 </a>
-             {% endfor %}
+   
+    {% else %}
+        {% for category, category_quotes in all_quotes %}
+        <h1>{{ category }}</h1> 
+        {% for q in category_quotes %}
+            <li><a href="{% url 'result' q.id %}">{{ q.text }}</a> - {{q.author}}</li>
+            <br>
         {% endfor %}
     {% endfor %}
-
+</td>
+</tr>
+</table>       
+   
 {% endif %}
+</p>
 {% endblock content %}
-

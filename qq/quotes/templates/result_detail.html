@@ -2,25 +2,13 @@
 
 {% extends 'nav.html' %}
 {% block content %}
-
+<br><br>
 <center>
-   {{ quote.text }} {{ quote.author }} 
+    {{ quote.text }} - {{ quote.author }} <br><br>
     <form action="{% url 'update' quote.id %}" method="GET">
-       
-        
-        <input type="submit" name="update" value="Update" />
-     
+       <input type="submit" name="update" value="Update" />
     </form>
 </center>
-
-
- {% for tag in quote.tags_set.all %}
-    {{ tag }} 
-{% endfor %}
-
-{% for category in quote.category_set.all %}
-    {{ category }} 
-{% endfor %}
 
 
 {% endblock content %}

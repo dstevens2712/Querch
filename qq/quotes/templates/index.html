@@ -11,8 +11,13 @@
         {{ daily.text }}<br>
         <label>- {{ daily.author.author }}</label>
     </p>
-    <!-- <input type='text' name='search' placeholder='Search Here for a Quote'>&nbsp</input>
-    <input type='submit' value='Search'/> -->
+    <h1>Search for a quote or author</h1>
+<form action="{% url 'search' %}" method="get">
+  {% csrf_token %}
+  <input name="quote" type="text" placeholder="Search..." />
+  <input type='submit' value='Search'/> 
+</form>
+    
     <br><br><br>
     <h2>Choose A Quote Category</h2>
     <form action="{% url 'results' %}" method="GET">

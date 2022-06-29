@@ -1,27 +1,38 @@
 <!-- for further development after mvp -->
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Django Search</title>
-</head>
-<body>
+{% extends 'nav.html' %}
+<!-- Title Section -->
+{% block title %} Quotable Quotes {% endblock title %}
 
+<!-- Content Section -->
+{% block content %}
 
-
-<form action="{% url 'search' %}" method="POST">
-    {% csrf_token %} 
-    <input type="text" name="name">
-    <input type="submit" name="submit" value="Search">
+<h1>Search for a quote or author</h1>
+<form action="{% url 'search' %}" method="get">
+  {% csrf_token %}
+  <input name="quote" type="text" placeholder="Search..." />
 </form>
+<h1> 
+  
+</h1>
+{% for quote in quotes %}
+{{quote}}  {{author}}
 
 
+<div class="card bg-light" style="width: 20rem">
+  <div class="card-header bg-info">
+    <div class="row">
+      <h5 class="col-9">{{ quote.quote|capfirst }}</h5>
+     
+    </div>
+  </div>
+  
+</div>
+{% endfor %} 
 
-{% for result in results %}
+{% for author_quote in author_quotes %}
+{{author_quote.text}} {{author_quote.author}}
+{{authors}} {{quotes}}
+{% endfor %} 
+{% endblock content %}
 
-    <p>{{result.name}}</p>
-
-{% endfor %}
-
-</body>
-</html>

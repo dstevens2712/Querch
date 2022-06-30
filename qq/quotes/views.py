@@ -173,7 +173,7 @@ class Search(View):
             search = request.GET['quote']
             quote = Quote.objects.filter(
                text__icontains=str(search))
-            authors = Author.objects.filter(authors__icontains=str(search))
+            authors = Author.objects.filter(author__icontains=str(search))
             author_quotes = Quote.objects.filter( author__in=authors)
             context = {
                 "search": search,

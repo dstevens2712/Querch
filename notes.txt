@@ -1,0 +1,2 @@
+refer class Quote in admin.py to html
+in admin.py #from .models import

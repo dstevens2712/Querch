@@ -13,7 +13,7 @@ urlpatterns = [
     path('results', Results.as_view(), name='results'),
     path('result/<int:quote_id>', Result.as_view(), name='result'),
     path('update/<int:quote_id>', Update.as_view(), name='update'),
-    path("signup/", SignUpView.as_view(), name="signup")
-    # path('quote/'. quote_list.as_view, name='quote_list'),
+    path('signup/', SignUpView.as_view(), name='signup'),
+    
 ]
 

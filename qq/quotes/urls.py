@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import Home, AboutUs, AddQuote, Results, Result, Update
+from .views import Home, AboutUs, AddQuote, Results, Result, Update, SignUpView
 from .import views
 
 # connects our code to a specific page
@@ -13,6 +13,9 @@ urlpatterns = [
     path('results', Results.as_view(), name='results'),
     path('result/<int:quote_id>', Result.as_view(), name='result'),
     path('update/<int:quote_id>', Update.as_view(), name='update'),
-    # path('quote/'. quote_list.as_view, name='quote_list'),
+     path('signup/', SignUpView.as_view(), name='signup'),
+     
 ]
+
+
 

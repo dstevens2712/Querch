@@ -165,6 +165,33 @@ class Update(View):
 
             return redirect('home') # If deleted a quote you will be directed back to home page
 
+
+
+
+class Search(View):
+
+    def get(self, request):
+
+        try:
+            search = request.GET['quote']
+            quote = Quote.objects.filter(
+               text__icontains=str(search))
+            authors = Author.objects.filter(author__icontains=str(search))
+            author_quotes = Quote.objects.filter( author__in=authors)
+            context = {
+                "search": search,
+                "quotes": quote,
+                "authors": authors,
+                "author_quotes":author_quotes
+            }
+
+            return render(request, "search.html", context)
+
+        except Exception as e:
+            print(e) 
+
+            return render(request, "search.html")
+
                      
 class SignUpView(generic.CreateView):
     form_class = UserCreationForm

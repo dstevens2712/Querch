@@ -1,40 +1,61 @@
-
-
-{% block title %}Login{% endblock %}
-
+{% extends 'nav.html' %}
 {% block content %}
 
-  {% if form.errors %}
-    <p>Your username and password didn't match. Please try again.</p>
-  {% endif %}
+<style>
+  table {
+    max-width: 85%;
+    padding-left: 35px;
+  }
+</style>
+<br><br>
 
-  {% if next %}
-    {% if user.is_authenticated %}
+<table>
+  <tr>
+    <td>
+
+      {% if form.errors %}
+      <p>Your username and password didn't match. Please try again.</p>
+      {% endif %}
+
+      {% if next %}
+      {% if user.is_authenticated %}
       <p>Your account doesn't have access to this page. To proceed,
-      please login with an account that has access.</p>
-    {% else %}
+        please login with an account that has access.</p>
+      {% else %}
       <p>Please login to see this page.</p>
-    {% endif %}
-  {% endif %}
+      {% endif %}
+      {% endif %}
+  </td>
+</tr>
 
-  <form method="post" action="{% url 'login' %}">
-    {% csrf_token %}
-    <table>
-      <tr>
-        <td>{{ form.username.label_tag }}</td>
-        <td>{{ form.username }}</td>
-      </tr>
-      <tr>
-        <td>{{ form.password.label_tag }}</td>
-        <td>{{ form.password }}</td>
-      </tr>
-    </table>
-    <input type="submit" value="login">
-    <input type="hidden" name="next" value="{{ next }}">
-  </form>
+      <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+      
+          <tr>
+            <td>{{ form.username.label_tag }}</td>
+            <td>{{ form.username }}</td>
+          </tr>
+          <tr>
+            <td>{{ form.password.label_tag }}</td>
+            <td>{{ form.password }}</td>
+          </tr>
+          <tr>
+            <td> <br> 
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="submit" value="Login">
+              <input type="hidden" name="next" value="{{ next }}">
+      </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p><a href="{% url 'password_reset' %}">Forgot Your Password?</a></p>
+            </td>
+          </tr>
+</table>
 
-  {# Assumes you setup the password_reset view in your URLconf #}
-  <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
 
-{% endblock %} 
-
+{% endblock content %}

@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import Home, AboutUs, AddQuote, Results, Result, Update, SignUpView, Search
 from .import views
+
 # connects our code to a specific page
 # code will render the following URLs: /home /about /add /results
 urlpatterns = [

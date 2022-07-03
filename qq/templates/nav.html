@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Quotable Quotes</title>
+    
     <style>
         .navbar{
             background-color: purple;
@@ -21,7 +22,7 @@
             float:left;
             list-style: none; 
             margin: 13px 20px;
-            
+            font-size: 1.5em;     
         }
         .navbar li a{
             padding: 3px 3px;
@@ -31,18 +32,8 @@
         .navbar li a:hover{
             color: red
         }
-        .signup li{
-            float: right;
-            color: white;
-            padding: 3px 17px;
-        }
-        .navbar input{
-            border: 2px solid black;
-            border-radius: 14px;
-            padding: 3px 17px;
-            width: 129px;
-        }
     </style>
+
 </head>
 
 <body style="background-color:beige;">
@@ -53,13 +44,13 @@
                 <li><a href="{% url 'about' %}">About</a></li>
                 <li><a href="{% url 'add' %}">Add</a></li>
                 <li><a href="{% url 'results' %}">Browse All Quotes</a></li>
-                <li><a href="{% url 'signup' %}">Sign Up</a></li>
-                <li><a href="{% url 'login' %}">Login</a></li>
+                <li style="float:right"><a href="{% url 'login' %}">Login</a></li>
+                <li style="float:right"><a href="{% url 'signup' %}">Sign Up</a></li>
             </ul>
         </nav>
     </header>
-    {% block content %}
 
+    {% block content %}
     {% endblock content %}
 </body>
 

@@ -1,14 +1,31 @@
 <!-- templates/registration/signup.html -->
 
-
-{% block title %}Sign Up{% endblock %}
-
+{% extends 'nav.html' %}
 {% block content %}
-  <h2>Sign up</h2>
+
+<style>
+    table {
+      max-width: 85%;
+      padding-left: 35px;
+    }
+</style>
+
+<table>
+    <tr>
+    <td>
+
+<h2>Sign up</h2>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Sign Up</button>
   </form>
-{% endblock %}
+
+  
+</td>
+</tr>
+</table>       
+   
+
+{% endblock content %}
 

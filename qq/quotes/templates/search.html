@@ -8,26 +8,23 @@
 </style>
 <table>
   <tr>
-  <td>
-<h1>Search for a quote or author</h1>
-<form action="{% url 'search' %}" method="get">
-  {% csrf_token %}
-  <input name="quote" type="text" placeholder="Search..." />
-</form>
-{% for quote in quotes %}
-{{quote}}  {{author}}
-<div class="card bg-light" style="width: 20rem">
-  <div class="card-header bg-info">
-    <div class="row">
-      <h5 class="col-9">{{ quote.quote|capfirst }}</h5>
-    </div>
-  </div>
-</div>
-{% endfor %}
-{% for author_quote in author_quotes %}
-<li>{{author_quote.text}} {{author_quote.author}}<br></li>
-</td>
-</tr>
+    <td>
+      <h1>Search for a quote or author</h1>
+      <form action="{% url 'search' %}" method="get">
+        {% csrf_token %}
+        <input name="quote" type="text" placeholder="Search..." />
+        <input type='submit' value='Search'/> 
+      </form>
+<br>
+      {% for quote in quotes %}
+      <li>{{quote}} -{{quote.author}}<br><br></li>
+      {% endfor %}
+
+      {% for author_quote in author_quotes %}
+      <li>{{author_quote.text}} -{{author_quote.author}}<br><br></li>
+      {% endfor %}    
+    </td>
+  </tr>
 </table>
-{% endfor %}
+
 {% endblock content %}

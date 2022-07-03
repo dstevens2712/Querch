@@ -45,8 +45,8 @@ class AddQuote(View):
         quote_form = QuoteForm()
         return render(
             request,
-            'quote.html',
-            'registration.html',
+            'add_quote.html',
+            # 'registration.html',
             {
                 'quote_form' : quote_form,
             }

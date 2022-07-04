@@ -1,6 +1,12 @@
 {% block content %}
+<!-- The code starts with a <p> tag that contains the text "Logged out!" -->
   <p>Logged out!</p>
+  <!-- Next, there is an anchor tag with a href attribute of "login" which links to the login page.  -->
   <a href="{% url 'login'%}">Click here to login again.</a>
+  <!-- The end block has two tags: {% block content %} and {% endblock %}.
+The first one starts with a curly brace ({) and ends at the next curly brace (}) on its own line.
+It contains some text in between these braces, but it's not important for this exercise.
+The second one starts with another curly brace ({) and ends at the same place as the first one on its own line. -->
 {% endblock %}
 
 

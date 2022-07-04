@@ -131,6 +131,8 @@ class Update(View):
                 return redirect('result', quote.id) # Here you will be directed back to the result page page                      
             quote.delete()
             return redirect('home') # If deleted a quote you will be directed back to home page
+           
+            # Searches for a class in a view.
 class Search(View):
     def get(self, request):
         try:
@@ -148,11 +150,14 @@ class Search(View):
 
             return render(request, "search.html", context)
 
+        # Print exceptions to stdout.
         except Exception as e:
             print(e) 
 
             return render(request, "search.html")
 
+
+# Creates a signup view with a generic class.
                      
 class SignUpView(generic.CreateView):
     form_class = UserCreationForm

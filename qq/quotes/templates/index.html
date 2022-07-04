@@ -3,6 +3,7 @@
 {% extends 'nav.html' %}
 {% block content %}
 
+<!-- this code will create a table for the random quotes to display -->
 <br><br><br>
 <style>
     table {
@@ -20,7 +21,7 @@
         <label>- {{ daily.author.author }}</label>
     </p>
 
-
+<!-- here we search all quotes and all author, to display a quote input or an author input -->
     <h1>Search for a quote or author</h1>
 <form action="{% url 'search' %}" method="get">
   {% csrf_token %}
@@ -33,11 +34,13 @@
 <table>
 <tr>
 <td><center>
+   <!--   We use a form to display the quotes organized by categories-->
     <form action="{% url 'results' %}" method="GET">
     {% for category in categories %}
         <input type='submit' name='category' value={{category}} style="margin-bottom:10px">&nbsp &nbsp</input>
     {% endfor %}
     </form></center>
+<!-- We indicate an end to the table, its rows and data -->
 </td>
 </tr>
 </table>    

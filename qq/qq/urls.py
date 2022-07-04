@@ -17,8 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    # The code will create a new route called admin/login and it will be available at the following URL: http://localhost/admin/login The code will also create a new route called admin/register which is accessible at the following URL: http://localhost/admin/register
     path('admin/', admin.site.urls),
+    # Include quotes. urls in the path.
     path('', include('quotes.urls')),
+    # The code will take the user to the 'accounts' view.
     path('accounts/', include('django.contrib.auth.urls'))
 ]
 

@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 
 # Create your models here.
-# These are the quotes diplaying the relationships
+# These are the quotes diplaying the different relationships
 class Quote(models.Model):
 
     text = models.TextField()

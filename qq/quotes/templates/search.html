@@ -1,5 +1,7 @@
 {% extends 'nav.html' %}
 {% block content %}
+
+<!-- this code will create a table for search input -->
 <style>
   table {
     max-width: 85%;
@@ -16,10 +18,12 @@
         <input type='submit' value='Search'/> 
       </form>
 <br>
+<!-- a search by quotes -->
       {% for quote in quotes %}
       <li>{{quote}} -{{quote.author}}<br><br></li>
       {% endfor %}
 
+      <!-- a search by author -->
       {% for author_quote in author_quotes %}
       <li>{{author_quote.text}} -{{author_quote.author}}<br><br></li>
       {% endfor %}    
